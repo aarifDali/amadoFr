@@ -10,11 +10,11 @@ from django.contrib.auth.hashers import make_password, check_password
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 
 from accounts.models import Account
-from store.models import Product
+from store.models import Product, Variation
 # from orders.models import Order
 from category.models import Category
 
-from adminpanel.forms import ProductForm, CategoryForm
+from adminpanel.forms import ProductForm, CategoryForm, VariationForm
 
 
 
@@ -38,6 +38,97 @@ def manager_dashboard(request):
         }
 
     return render(request, 'manager/manager_dashboard.html', context)
+
+
+
+
+# Manage Variation
+@never_cache
+@login_required(login_url='manager_login')
+def manage_variation(request):
+  if request.user.is_admin: 
+    if request.method == 'POST':
+      keyword = request.POST['keyword']
+      variations = Variation.object.filter(Q(product__product_name__icontains=keyword) | Q(variation_catagory__icontains=keyword) | Q(variation_value__icontains=keyword)).order_by('id')
+    
+    else:
+      variations = Variation.object.all().order_by('id')
+    
+    paginator = Paginator(variations, 10)
+    page = request.GET.get('page')
+    paged_variations = paginator.get_page(page)
+    
+    context = {
+      'variations': paged_variations
+    }
+    return render(request, 'manager/variation_management.html', context)
+
+  else:
+    return redirect('home')
+
+
+
+@never_cache
+@login_required(login_url='manager_login')
+def delete_variation(request, variation_id):
+    if request.user.is_admin:
+        variations = Variation.object.get(id=variation_id)
+        variations.delete()
+        return redirect('manage_variation')
+
+    else:
+        return redirect('home')
+
+
+#Add Variation
+@never_cache
+@login_required(login_url='manager_login')
+def add_variation(request):
+    if request.user.is_admin:
+        if request.method == 'POST':
+            form = VariationForm(request.POST)
+            if form.is_valid():
+                form.save()
+                return redirect('manage_variation')
+
+        else:
+            form = VariationForm()
+
+        context = {
+            'form': form
+        }
+        return render(request, 'manager/add_variation.html', context)
+
+    else:
+        return redirect('home')
+
+
+
+# Update Variation
+@never_cache
+@login_required(login_url='manager_login')
+def update_variation(request, variation_id):
+  if request.user.is_admin:
+    variations = Variation.object.get(id=variation_id)
+  
+    if request.method == 'POST':
+      form = VariationForm(request.POST ,instance=variations)
+      if form.is_valid():
+        form.save()
+        return redirect('manage_variation')
+    
+    else:
+      form = VariationForm(instance=variations)
+    
+    context = {
+      'variations': variations,
+      'form': form
+    }
+    return render(request, 'manager/update_variation.html', context)
+  
+  else:
+    return redirect('home')
+
 
 
 #PRODUCT Management

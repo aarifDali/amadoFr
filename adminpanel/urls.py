@@ -10,6 +10,12 @@ urlpatterns = [
     path('manage_user', views.manage_user, name="manage_user"),
     path('manage_product/', views.manage_product, name='manage_product'),
     path('manage_category/', views.manage_category, name='manage_category'),
+    path('manage_variation/', views.manage_variation, name='manage_variation'),
+  
+    path('delete_variation/<int:variation_id>/', views.delete_variation, name='delete_variation'),
+    path('update_variation/<int:variation_id>/', views.update_variation, name='update_variation'),
+    
+    path('add_variation/', views.add_variation, name='add_variation'),
 
 
     path('ban_user/<int:user_id>/', views.ban_user, name='ban_user'),
