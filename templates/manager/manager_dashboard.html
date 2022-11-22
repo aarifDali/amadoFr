@@ -17,9 +17,9 @@
             <a class="list-group-item" href="{% url 'manage_product' %}"> Product Management <i class="fa fa-cubes" aria-hidden="true"></i></a>
             <a class="list-group-item" href="{% url 'manage_category' %}"> Category Management <i class="fa fa-cube" aria-hidden="true"></i></a>
             <a class="list-group-item " href="{% url 'manage_variation' %}"> Variation Management <i class="fa fa-filter" aria-hidden="true"></i></a>
-            {% comment %} <a class="list-group-item" href="{% url 'manage_order' %}"> Order Management </a>
+            <a class="list-group-item" href="{% url 'manage_order' %}"> Order Management </a>
             <a class="list-group-item" href="{% url 'admin_orders' %}"> My Orders </a>
-            <a class="list-group-item" href="{% url 'admin_change_password' %}"> Change Password </a> {% endcomment %}
+            <a class="list-group-item" href="{% url 'admin_change_password' %}"> Change Password </a> 
           </ul>
           <br />
           <a class="btn btn-danger btn-block" href="{% url 'manager_logout' %}"> <i class="fa fa-power-off"></i> <span class="text">Log out</span> </a>
@@ -54,7 +54,7 @@
                 </div>
               </div>
             </div>
-            {% comment %} <div class="col-sm-6 text-center mb-2">
+            <div class="col-sm-6 text-center mb-2">
               <div class="card">
                 <div class="card-body">
                   <h5 class="card-title">Total Orders</h5>
@@ -63,7 +63,7 @@
                 </div>
               </div>
             </div>  
-            <div class="col text-center mb-2">
+            {% comment %} <div class="col text-center mb-2">
               <div class="card">
                 <div class="card-body">
                   <h5 class="card-title">Total Sales</h5>

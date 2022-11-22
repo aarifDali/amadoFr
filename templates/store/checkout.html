@@ -12,16 +12,16 @@
     <div class="card">
         <div class="card-body">
             <h4 class="card-title mb-4">Billing Address</h4>
-            <form action="" method="POST">
+            <form action="{% url 'place_order' %}" method="POST">
                 {% csrf_token %}
                 <div class="form-row">
                     <div class="col form-group">
                         <label for="">First Name</label>
-                        <input type="text" name="first_name" class="form-control" required>
+                        <input type="text" name="firstname" class="form-control" required>
                     </div>
                     <div class="col form-group">
                         <label for="">Last Name</label>
-                        <input type="text" name="last_name" class="form-control" required>
+                        <input type="text" name="lastname" class="form-control" required>
                     </div>
                 </div>
                 <div class="form-row">
@@ -31,7 +31,7 @@
                     </div>
                     <div class="col form-group">
                         <label for="">Phone Number</label>
-                        <input type="text" name="phone" class="form-control" required>
+                        <input type="text" name="phone_number" class="form-control" required>
                     </div>
                 </div>
                 <div class="form-row">
@@ -89,7 +89,12 @@
                                 <div class="aside"><img src="{{ cart_item.product.image.url}}" class="img-sm"></div>
                                 <figcaption class="info">
                                     <a href="{{ cart_item.product.get_url }}" class="title text-dark">{{cart_item.product.product_name}}</a>
-                                    <p class="text-muted small">Matrix: 25 Mpx <br> Brand: Canon</p>
+                                    <p class="text-muted small">
+                                        {% if cart_item.variations.all %} {% for variation in cart_item.variations.all %} {{ variation.variation_catagory | capfirst }} : {{ variation.variation_value }}
+                                        <br />
+                                        {% endfor %} 
+                                        {% endif %}
+                                      </p>
                                 </figcaption>
                             </figure>
                         </td>
@@ -108,8 +113,10 @@
                     </tbody>
                     </table>  
                 
-                <button type="submit" name="submit" class="btn btn-primary btn-block">Place Order</button>
-                <a href="{% url 'store' %}" class="btn btn-light btn-block">Continue Shopping</a>
+                    <button name="submit" type="submit" class="btn btn-success btn-block" >COD | Place Order</button>
+                    <button name="submit" type="button" class="btn btn-primary payWithRazorpay btn-block" >Pay with RazorPay</button>
+                    
+                
             </form>
             </div> <!-- card-body.// -->
             </div> <!-- card.// -->
@@ -126,3 +133,9 @@
     <!-- ========================= SECTION CONTENT END// ========================= -->
 
 {% endblock content %}
+
+{% block scripts %}
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+{% endblock scripts %}
+

@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'store',
     'cart', 
     'adminpanel', 
+    'orders', 
 ]
 
 MIDDLEWARE = [
@@ -143,6 +144,8 @@ MESSAGE_TAGS = {
     messages.ERROR: 'danger',
 }
 
+
+
 #SMTP varification
 
 EMAIL_HOST = 'smtp.gmail.com'
@@ -150,3 +153,9 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'aliaarif995@gmail.com'
 EMAIL_HOST_PASSWORD = 'ebto zwgu vznl jznh'
 EMAIL_USE_TLS = True
+
+#Payment
+
+
+RAZOR_KEY_ID = 'rzp_test_uBPf8rCnhuHijR'
+RAZOR_KEY_SECRET ='douk4dSS2f91tPuq0VhYTsjg'

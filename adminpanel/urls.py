@@ -10,11 +10,11 @@ urlpatterns = [
     path('manage_user', views.manage_user, name="manage_user"),
     path('manage_product/', views.manage_product, name='manage_product'),
     path('manage_category/', views.manage_category, name='manage_category'),
+    path('manage_order/', views.manage_order, name='manage_order'),
     path('manage_variation/', views.manage_variation, name='manage_variation'),
   
     path('delete_variation/<int:variation_id>/', views.delete_variation, name='delete_variation'),
     path('update_variation/<int:variation_id>/', views.update_variation, name='update_variation'),
-    
     path('add_variation/', views.add_variation, name='add_variation'),
 
 
@@ -27,4 +27,11 @@ urlpatterns = [
 
     path('add_category/', views.add_category, name='add_category'),
     path('delete_category/<int:category_id>/', views.delete_category, name="delete_category"),
+
+    path('admin_cancel_order/<int:order_number>/', views.cancel_order, name='admin_cancel_order'),
+    path('accept_order/<int:order_number>/', views.accept_order, name='accept_order'),
+    path('complete_order/<int:order_number>/', views.complete_order, name='complete_order'),
+
+    path('change_password/', views.admin_change_password, name='admin_change_password'),
+    path('admin_orders/', views.admin_order, name='admin_orders'),
 ]
