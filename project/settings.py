@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'cart', 
     'adminpanel', 
     'orders', 
+    
 ]
 
 MIDDLEWARE = [
@@ -86,7 +87,7 @@ AUTH_USER_MODEL = 'accounts.Account'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'firstProject',
+        'NAME': 'amadofr',
         'USER': 'postgres',
         'PASSWORD': 'admin',
         'HOST': 'localhost', 

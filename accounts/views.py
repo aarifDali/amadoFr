@@ -39,7 +39,7 @@ def register(request):
 
             # USER ACTIVATION
             
-            current_site = get_current_site(request)
+            current_site = get_current_site(request)  
             mail_subject = "Please Activate your Account"
             message = render_to_string('accounts/account_varification_email.html', {
                 'user' :user,
@@ -170,14 +170,14 @@ def dashboard(request):
     orders_count = order.count()
     check = UserProfile.objects.filter(user_id=request.user.id)
     
-    if len(check):
-        userprofile = UserProfile.objects.get(user_id=request.user.id)
-        context = {
-            'orders_count': orders_count,
-            'userprofile': userprofile,
-        }
-        return render(request, 'accounts/dashboard.html', context)
-    return render(request, 'accounts/dashboard.html')
+    # if len(check):
+    userprofile = UserProfile.objects.get(user_id=request.user.id)
+    context = {
+        'orders_count': orders_count,
+        'userprofile': userprofile,
+    }
+    return render(request, 'accounts/dashboard.html', context)
+    # return render(request, 'accounts/dashboard.html')
 
 
 

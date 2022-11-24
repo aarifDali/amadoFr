@@ -30,6 +30,13 @@
 <script src="{% static 'js/script.js' %}" type="text/javascript"></script>
 
 
+<!-- PayPal Script -->
+<script src="https://www.paypal.com/sdk/js?client-id=AVP3gOAQELcmXIpdfpy8Vm_UZ8cdqJvIdYFEnOaeG8cT6qnfDGzdqJrOBhx0ZerqnUgVnQ4FyOeggL1G&currency=USD"></script>
+
+
+
+
+
 
 
 <script type="text/javascript">
@@ -49,11 +56,15 @@ $(document).ready(function() {
 
     {% include 'includes/navbar.html' %}
 
-    {% block content %}
-    
-    {% endblock content %}
+   
     {% comment %} sweet Alert {% endcomment %}
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> 
+
+    
+
+    {% block content %}
+    
+    {% endblock  %}
 
     {% include 'includes/footer.html' %} 
 
