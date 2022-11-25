@@ -4,6 +4,8 @@ from .forms import OrderForm
 from .models import Order,Payment, OrderProduct
 from store.models import Product
 
+from django.http import HttpResponse
+
 import datetime
 import razorpay
 
@@ -137,6 +139,12 @@ def place_order(request, total=0, quantity=0):
 
         else:
             return redirect('checkout')
+
+
+def cod(request):
+    return render(request, 'orders/cod.html')
+
+
 
 
 
