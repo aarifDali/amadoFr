@@ -147,7 +147,7 @@ def cod(request):
 
 
 
-
+ 
 def payment_success(request):
     order_number = request.session['order_number']
     transaction_id = Payment.objects.get(order_number=order_number)
@@ -156,7 +156,7 @@ def payment_success(request):
         order = Order.objects.get(order_number=order_number, is_ordered=True)
         
         # Change order status to Accepted when order is success
-        order.status = 'Accepted'
+        order.status = 'Order Accepted' 
         order.save()
         
         ordered_products = OrderProduct.objects.filter(order_id=order.id)
@@ -213,7 +213,7 @@ def payment_status(request):
         'razorpay_order_id': response['razorpay_order_id'],
         'razorpay_payment_id': response['razorpay_payment_id'],
         'razorpay_signature': response['razorpay_signature']
-    }
+    } 
     
 
     # authorize razorpay client with API Keys.

@@ -17,21 +17,21 @@
                 <div class="form-row">
                     <div class="col form-group">
                         <label for="">First Name</label>
-                        <input type="text" name="first_name" class="form-control" required>
+                        <input type="text" name="first_name" class="form-control" value="{{request.user.first_name}}" required>
                     </div>
-                    <div class="col form-group">
+                    <div class="col form-group"> 
                         <label for="">Last Name</label>
-                        <input type="text" name="last_name" class="form-control" required>
+                        <input type="text" name="last_name" class="form-control" value="{{request.user.last_name}}" required>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="col form-group">
                         <label for="">Email</label>
-                        <input type="email" name="email" class="form-control" required>
+                        <input type="email" name="email" class="form-control" value="{{request.user.email}}" required>
                     </div>
                     <div class="col form-group">
                         <label for="">Phone Number</label>
-                        <input type="text" name="phone" class="form-control" required>
+                        <input type="text" name="phone" class="form-control" value="{{request.user.phone_number}}" required>
                     </div>
                 </div>
                 <div class="form-row">
@@ -41,17 +41,17 @@
                     </div>
                     <div class="col form-group">
                         <label for="">Address Line 2</label>
-                        <input type="text" name="address_line_2" class="form-control">
+                        <input type="text" name="address_line_2" class="form-control" >
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="col form-group">
                         <label for="">City</label>
-                        <input type="text" name="city" class="form-control" required>
+                        <input type="text" name="city" class="form-control"  required>
                     </div>
                     <div class="col form-group">
-                        <label for="">State</label>
-                        <input type="text" name="state" class="form-control" required>
+                        <label for="" va>State</label>
+                        <input type="text" name="state" class="form-control"  required>
                     </div>
                     <div class="col form-group">
                         <label for="">Zip Code</label>
@@ -90,9 +90,11 @@
                                 <figcaption class="info">
                                     <a href="{{ cart_item.product.get_url }}" class="title text-dark">{{cart_item.product.product_name}}</a>
                                     <p class="text-muted small">
-                                        {% if cart_item.variations.all %} {% for variation in cart_item.variations.all %} {{ variation.variation_catagory | capfirst }} : {{ variation.variation_value }}
+                                        {% if cart_item.variations.all %} 
+                                            {% for variation in cart_item.variations.all %} 
+                                                {{ variation.variation_category | capfirst }} : {{ variation.variation_value }}
                                         <br />
-                                        {% endfor %} 
+                                            {% endfor %} 
                                         {% endif %}
                                       </p>
                                 </figcaption>
@@ -113,8 +115,8 @@
                     </tbody>
                     </table>  
                 
-                    <button name="submit" type="submit" class="btn btn-warning btn-block">Place Order</button>
-                    <a href="{% url 'cod' %}" class="btn btn-primary btn-block">Cash on Delivary</a>
+                    <button name="submit" type="submit" class="btn btn-dark btn-block">Place Order <i class="fa fa-truck" aria-hidden="true"></i></button>
+                    
             </form>
             </div> <!-- card-body.// -->
             </div> <!-- card.// -->

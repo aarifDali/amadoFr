@@ -1,18 +1,19 @@
 from django.db import models
 from store.models import Product, Variation
-from accounts.models import Account
+from accounts.models import Account, UserProfile
 # Create your models here.
-
+ 
 class Cart(models.Model):
     cart_id = models.CharField(max_length=255, blank=True)
     dare_added = models.DateField(auto_now_add=True)
 
-    def __str__(self):
+    def __str__(self): 
         return self.cart_id
 
 
 class CartItem(models.Model): 
     user = models.ForeignKey(Account, on_delete=models.CASCADE, null=True)
+    # cust = models.ForeignKey(UserProfile, on_delete=models.CASCADE, null=True)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     variations = models.ManyToManyField(Variation, blank=True) 
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE, null=True)

@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required 
 from django.views.decorators.cache import never_cache
 
 from django.db.models import Q 
@@ -10,7 +10,7 @@ from django.contrib.auth.hashers import make_password, check_password
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 
 from accounts.models import Account
-from store.models import Product, Variation
+from store.models import Product, Variation, ReviewRating
 from orders.models import Order
 from category.models import Category
 
@@ -54,7 +54,7 @@ def manage_variation(request):
     else:
       variations = Variation.object.all().order_by('id')
     
-    paginator = Paginator(variations, 10)
+    paginator = Paginator(variations, 5)
     page = request.GET.get('page')
     paged_variations = paginator.get_page(page)
     
@@ -145,7 +145,7 @@ def admin_order(request):
     else:
       orders = Order.objects.filter(user=current_user, is_ordered=True).order_by('-created_at')
     
-    paginator = Paginator(orders, 10)
+    paginator = Paginator(orders, 3)
     page = request.GET.get('page')
     paged_orders = paginator.get_page(page)
     context = {
@@ -171,7 +171,7 @@ def manage_order(request):
     else:
       orders = Order.objects.filter(is_ordered=True).order_by('-order_number')
       
-    paginator = Paginator(orders, 10)
+    paginator = Paginator(orders, 5)
     page = request.GET.get('page')
     paged_orders = paginator.get_page(page)
     context = {
@@ -189,7 +189,7 @@ def manage_order(request):
 def cancel_order(request, order_number):
   if request.user.is_admin:
     order = Order.objects.get(order_number=order_number)
-    order.status = 'Cancelled'
+    order.status = 'Order Cancelled'
     order.save()
     
     return redirect('manage_order')
@@ -205,7 +205,7 @@ def cancel_order(request, order_number):
 def accept_order(request, order_number):
   if request.user.is_admin:
     order = Order.objects.get(order_number=order_number)
-    order.status = 'Accepted'
+    order.status = 'Order Accepted'
     order.save()
     
     return redirect('manage_order')
@@ -221,7 +221,7 @@ def accept_order(request, order_number):
 def complete_order(request, order_number):
   if request.user.is_admin:
     order = Order.objects.get(order_number=order_number)
-    order.status = 'Completed'
+    order.status = 'Delivered Successfully'
     order.save()
     
     return redirect('manage_order')
@@ -243,7 +243,7 @@ def manage_product(request):
         else:
             products = Product.objects.all().order_by('id')
 
-        paginator = Paginator(products, 10)
+        paginator = Paginator(products, 4)
         page      = request.GET.get('page')
         paged_products = paginator.get_page(page)
 
@@ -336,7 +336,7 @@ def manage_category(request):
         else:
             categories = Category.objects.all().order_by('id')
 
-        paginator = Paginator(categories, 10)
+        paginator = Paginator(categories, 3)
         page = request.GET.get('page')
         paged_categories = paginator.get_page(page)
 
@@ -402,7 +402,7 @@ def manage_user(request):
     else:
         users = Account.objects.filter(is_admin=False).order_by('id')
 
-    paginator   = Paginator(users, 10) 
+    paginator   = Paginator(users, 3) 
     page        = request.GET.get('page')
     paged_users = paginator.get_page(page)
 
@@ -509,3 +509,33 @@ def admin_change_password(request):
   
   else:
     return redirect('home')
+
+
+# Review Management
+
+def review_management(request):
+    reviews = ReviewRating.objects.all()
+    context = {
+      'reviews': reviews
+    }
+    return render(request, 'manager/review_management.html', context)
+
+
+def review_block(request, review_id):
+    print("hai")
+    review = ReviewRating.objects.get(id=review_id)
+    review.status = False
+    review.save()
+    return redirect('review_management')
+
+def review_unblock(request, review_id):
+    review = ReviewRating.objects.get(id=review_id)
+    review.status= True
+    review.save()
+    return redirect('review_management')
+
+
+def review_delete(request, review_id):
+    review = ReviewRating.objects.get(id=review_id)
+    review.delete()
+    return redirect('review_management')

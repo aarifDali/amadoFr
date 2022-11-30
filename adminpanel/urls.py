@@ -12,6 +12,7 @@ urlpatterns = [
     path('manage_category/', views.manage_category, name='manage_category'),
     path('manage_order/', views.manage_order, name='manage_order'),
     path('manage_variation/', views.manage_variation, name='manage_variation'),
+    path('review_management/', views.review_management, name='review_management'),
   
     path('delete_variation/<int:variation_id>/', views.delete_variation, name='delete_variation'),
     path('update_variation/<int:variation_id>/', views.update_variation, name='update_variation'),
@@ -34,4 +35,8 @@ urlpatterns = [
 
     path('change_password/', views.admin_change_password, name='admin_change_password'),
     path('admin_orders/', views.admin_order, name='admin_orders'),
+
+    path('review_block/<int:review_id>/', views.review_block, name="review_block"),
+    path('review_unblock/<int:review_id>/', views.review_unblock, name="review_unblock"),
+    path('review_delete/<int:review_id>/', views.review_delete, name="review_delete"),
 ]

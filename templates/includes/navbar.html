@@ -65,10 +65,17 @@
                         {% if user.id is not None %}
                         <div class="widget-header">
                             <small class="title text-success">Welcome {{user.first_name}}</small>
+                            {% if user.is_admin %}
+                            <div> 
+                                <a href="{% url 'manager_dashboard' %}">My Profile</a> <span class="dark-transp"> | </span>
+                                <a href="{% url 'logout' %}">Logout</a>
+                            </div>
+                            {% else %}
                             <div> 
                                 <a href="{% url 'dashboard' %}">My Profile</a> <span class="dark-transp"> | </span>
                                 <a href="{% url 'logout' %}">Logout</a>
                             </div>
+                            {% endif %}
                         </div>
                         {% else %}
                         <div class="widget-header">

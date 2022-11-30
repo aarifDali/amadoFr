@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-
+{% load static %}
 {% block content %}
 
 
@@ -17,7 +17,7 @@
                         <!-- Start .row -->
                         <div class="col-lg-6">
                             <!-- col-lg-6 start here -->
-                            <h1 style="font-family: 'Permanent Marker', cursive; color:dark;" class="h2">Amado Furniture</h1>
+                            <img class="logo" src="{% static './images/logo_amado.png' %}">
                         </div>
                         <!-- col-lg-6 end here -->
                         <div class="col-lg-6">
@@ -29,7 +29,7 @@
                                     <li>{{order.full_address}}</li>
                                     <li>{{order.city}}, {{order.state}}</li>
                                     <li>{{order.pin}}</li>
-                                </ul>
+                                </ul> 
                             </div>
                         </div>
                         <!-- col-lg-6 end here -->
@@ -41,7 +41,7 @@
                                         <li><strong>Order</strong> #{{order.order_number}}</li>
                                         <li><strong>Transaction</strong> {{order.payment.payment_id}}</li>
                                         <li><strong>Order Date:</strong> {{order.created_at}}</li>
-                                        <li><strong>Status:</strong>{{order.payment.status}}</li>
+                                        <li><strong>Status:</strong><span class="text-info font-weight-bold">{{ order.status }}</span></li>
                                     </ul>
                                 </div>
                             </div>

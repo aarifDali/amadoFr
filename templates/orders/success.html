@@ -53,21 +53,21 @@
             <!-- col-lg-6 end here -->
             <div class="col-lg-12">
               <!-- col-lg-12 start here -->
-              <div class="invoice-details mt25">
+              <div class="invoice-details mt25"> 
                 <div class="well">
                   <ul class="list-unstyled mb0">
                     <li><strong>Order: </strong> #{{ order.order_number }}</li>
                     <li><strong>Transaction: </strong> #{{ transaction_id }}</li>
                     <li><strong>Order Date: </strong> {{ order.created_at }}</li>
                     <li>
-                      <strong>Status:</strong> {% if order.status == 'Cancelled' %}
+                      <strong>Status:</strong> {% if order.status == 'Order Cancelled' %}
                       <span class="text-danger font-weight-bold">{{ order.status }}</span>
-                      {% elif order.status == 'Completed' %}
+                      {% elif order.status == 'Order Completed' %}
                       <span class="text-success font-weight-bold">{{ order.status }}</span>
                       {% else %} <span class="text-info font-weight-bold">{{ order.status }}</span> {% endif %}
                     </li>
                   </ul>
-                </div>
+                </div> 
               </div>
 
               <div class="invoice-items">
@@ -83,7 +83,17 @@
                     <tbody>
                       {% for ordered_product in ordered_products %}
                       <tr>
-                        <td>{{ ordered_product.product.product_name }}</td>
+            
+                        <td>
+                          <div>{{ ordered_product.product.product_name }}</div>
+                          <p class="text-muted small">
+                            {% if ordered_product.variation.all %}
+                                {% for item in ordered_product.variation.all %}
+                                    {{ item.variation_category | capfirst }} : {{ item.variation_value }}
+                                {% endfor %} 
+                            {% endif %}
+                        </p>
+                        </td>
                         <td class="text-center">{{ ordered_product.quantity }}</td>
                         <td class="text-center">₹ {{ ordered_product.product_price }}</td>
                       </tr>

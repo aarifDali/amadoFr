@@ -8,6 +8,7 @@ from django.http import HttpResponse
 from orders.models import Order, OrderProduct
 
 import requests
+
 # verification email
 
 from django.contrib.sites.shortcuts import get_current_site
@@ -179,7 +180,7 @@ def dashboard(request):
     return render(request, 'accounts/dashboard.html', context)
     # return render(request, 'accounts/dashboard.html')
 
-
+ 
 
 @login_required(login_url ='login')
 def my_orders(request):
