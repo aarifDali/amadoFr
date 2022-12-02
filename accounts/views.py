@@ -183,7 +183,7 @@ def dashboard(request):
  
 
 @login_required(login_url ='login')
-def my_orders(request):
+def my_orders(request): 
     order = Order.objects.filter(user=request.user, is_ordered=True).order_by('-created_at')
     context ={
         'orders':  order,
@@ -328,4 +328,10 @@ def resetPassword(request):
     else:
         return render(request, 'accounts/resetPassword.html')
 
-  
+@login_required(login_url='login')
+def user_cancel_order(request, order_number):
+    order = Order.objects.get(order_number=order_number)
+    order.status = 'Order Cancelled'
+    order.save()
+
+    return render(request, 'accounts/cancel_order.html')

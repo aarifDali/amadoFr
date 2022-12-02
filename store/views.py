@@ -61,7 +61,7 @@ def product_detail(request, category_slug, product_slug):
         orderproduct = None 
 
     # Get the reviews
-    reviews = ReviewRating.objects.filter(product_id=single_product.id, status=True)
+    reviews = ReviewRating.objects.filter(product_id = single_product.id, status=True)
 
     
     context = {

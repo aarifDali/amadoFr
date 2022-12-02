@@ -37,25 +37,25 @@
                 <div class="form-row">
                     <div class="col form-group">
                         <label for="">Address Line 1</label>
-                        <input type="text" name="address_line_1" class="form-control" required>
+                        <input type="text" name="address_line_1" class="form-control" value="{{request.cust.address_1}}" required>
                     </div>
                     <div class="col form-group">
                         <label for="">Address Line 2</label>
-                        <input type="text" name="address_line_2" class="form-control" >
+                        <input type="text" name="address_line_2" class="form-control" value="{{request.cust.address_2}}" >
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="col form-group">
                         <label for="">City</label>
-                        <input type="text" name="city" class="form-control"  required>
+                        <input type="text" name="city" class="form-control" value="{{request.cust.city}}" required>
                     </div>
                     <div class="col form-group">
                         <label for="" va>State</label>
-                        <input type="text" name="state" class="form-control"  required>
+                        <input type="text" name="state" class="form-control" value="{{request.cust.state}}" required>
                     </div>
                     <div class="col form-group">
                         <label for="">Zip Code</label>
-                        <input type="text" name="zipcode" class="form-control" required>
+                        <input type="text" name="zipcode" class="form-control" value="{{request.cust.pin}}" required>
                     </div>
                 </div>
                     <div class="form-row">
