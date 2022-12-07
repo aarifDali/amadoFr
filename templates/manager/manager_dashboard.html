@@ -57,6 +57,34 @@
               </div>
             </div> {% endcomment %}
           </div>
+          <div class="w-75"> 
+            <canvas id="myChart" width="300" height="300"></canvas>
+          </div>
+    
+          <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+          <script>
+            const ctx = document.getElementById('myChart');
+    
+            new Chart(ctx, {
+              type: 'doughnut',
+              data: {
+                labels: ['Order', 'Product', 'User', 'Category'],
+                datasets: [{
+                  label: '',
+                  data: ['{{order_count}}', '{{product_count}}', '{{user_count}}', '{{category_count}}'],
+                  borderWidth: 1
+                }]
+              },
+              options: {
+                scales: {
+                  y: {
+                    beginAtZero: true
+                  }
+                }
+              }
+            });
+          </script>
   
           <!-- order-group.// -->
         </main>
@@ -64,6 +92,7 @@
       <!-- row.// -->
     </div> 
   </section>
+  
  
   <!-- ========================= SECTION CONTENT END// ========================= -->
 {% endblock %}
