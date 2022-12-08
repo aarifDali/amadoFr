@@ -2,6 +2,7 @@
 {% load static %}
 {% block content %}
 
+
 <section class="section-content padding-y bg">
     <div class="container">
     
@@ -67,12 +68,16 @@
             <div class="price-wrap"> 
                 <var class="price">₹{{cart_item.sub_total}}</var> 
                 <small class="text-muted"> ₹{{cart_item.product.price}} each</small> 
-            </div> <!-- price-wrap .// -->
+            </div> <!-- price-wrap   onclick="return confirm('Are you sure to want to remove this item?')"  .// -->
         </td>
         <td class="text-right"> 
-        <a href="{% url 'remove_cart_item' cart_item.product.id cart_item.id %}" onclick="return confirm('Are you sure to want to remove this item?')" class="btn btn-danger"> Remove</a>
+            
+        <a href="{% url 'remove_cart_item' cart_item.product.id cart_item.id %}"  class="btn btn-danger" onclick="return confirm('Are you sure to want to remove this item?')"> Remove</a> 
+       
         </td>
     </tr>
+    
+
     {% endfor %}
     </tbody>
     </table>
@@ -103,6 +108,8 @@
                 <a href="{% url 'store' %}" class="btn btn-light btn-block">Continue Shopping</a>
             </div> <!-- card-body.// -->
             </div> <!-- card.// -->
+
+            
     
     </aside> <!-- col.// -->
     
@@ -112,7 +119,11 @@
     <!-- ============================ COMPONENT 1 END .// ================================= -->
     
     </div> <!-- container .//  -->
+    
     </section>
     <!-- ========================= SECTION CONTENT END// ========================= -->
+    
+
+    
 
 {% endblock content %}
