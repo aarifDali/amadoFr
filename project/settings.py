@@ -90,9 +90,9 @@ SWEETIFY_SWEETALERT_LIBRARY = 'sweetalert2'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'amadofr',
-        'USER': 'postgres',
-        'PASSWORD': 'admin',
+        'NAME': 'amadopr',
+        'USER': 'aarifali',
+        'PASSWORD': 'aarifali',
         'HOST': 'localhost', 
     }
 }
