@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
-from pathlib import Path
+from pathlib import Path 
 from decouple import config
 import os
 
@@ -90,9 +90,9 @@ SWEETIFY_SWEETALERT_LIBRARY = 'sweetalert2'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'amadopr',
-        'USER': 'aarifali',
-        'PASSWORD': 'aarifali',
+        'NAME': 'amadofr',
+        'USER': 'postgres',
+        'PASSWORD': 'admin',
         'HOST': 'localhost', 
     }
 }
